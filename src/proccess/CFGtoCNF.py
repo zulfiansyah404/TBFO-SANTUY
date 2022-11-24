@@ -7,6 +7,8 @@ def readFile(file):
         grammar = File.readlines()
         grammarAsList = []
         for line in grammar:
+            if line.startswith(('/', '#')):
+                continue
             convertedLine = line.replace("->", '').split()
             grammarAsList.append(convertedLine)
     return grammarAsList
@@ -72,4 +74,16 @@ def writeCNF(CNF):
         file.write("\n")
     file.close()
 
-writeCNF(convertCFG(readFile(os.getcwd()+'\\bin\\cfg.txt')))
+def mapCNF(CNF):
+    length = len(CNF)
+    dict = {}
+    for rule in CNF:
+        dict[rule[0]] = []
+        val = []
+        for idx in range(len(rule)):
+            val.append(rule[idx])
+        dict[rule[0]].append(val)
+    return dict
+
+
+
