@@ -137,10 +137,10 @@ tokenExprs = [
     (r'\;',                     "SEMICOLON"),
     (r"\b\'\b",                 "QOUTATION"),
     (r'\b\"\b',                 "DOUBLE_QOUTATION"),
-    (r'\(',                     "LPARENTHESIS"),
-    (r'\)',                     "RPARENTHESIS"),
-    (r'\{',                     "LCURBRACK"),
-    (r'\}',                     "RCURBRACK"),
+    (r'\(',                     "LPR"),
+    (r'\)',                     "RPR"),
+    (r'\{',                     "LCR"),
+    (r'\}',                     "RCR"),
 
     # Exception for variable
     (r'[A-Za-z_][A-Za-z0-9_]*', "VARIABLE"),
