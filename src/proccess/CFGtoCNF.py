@@ -80,10 +80,7 @@ def mapCNF(CNF):
     for rule in CNF:
         dict[rule[0]] = []
         val = []
-        for idx in range(len(rule)):
+        for idx in range(1, len(rule)):
             val.append(rule[idx])
         dict[rule[0]].append(val)
     return dict
-
-
-
