@@ -8,6 +8,14 @@ MOD -> mod
 POWER -> power
 INCRE -> incre
 DECRE -> decre
+PLUSEQ -> pluseq
+SUBEQ -> subeq
+POWEQ -> poweq
+DIVEQ -> diveq
+MULTEQ -> multeq
+MODEQ -> modeq
+EQUAL -> equal
+
 
 //logika//
 
@@ -16,8 +24,85 @@ IS_EQUALS -> is_equals
 IS_NOT_EQUAL -> is_not_equal
 IS_NOT_EQUALS -> is_not_equals
 AND -> and
+OR -> or
+NO -> no
 G -> g
 L -> l
 GE -> ge
 LE -> le
+
+//variabel//
+
+CONST -> const
+VAR -> var
+LET -> let
+INT -> int
+FLOAT -> float
+DOUBLE -> double
+BYTE -> byte
+SHORT -> short
+BOOLEAN -> boolean
+LONG -> long
+NULL -> null
+
+//penggunaan//
+
+FOR -> for
+WHILE -> while
+IF -> if
+ELSE -> else
+ELSE_IF -> else_if
+SWITCH -> switch
+CASE -> case
+TRY -> try
+THROW -> throw
+CATCH -> catch
+RETURN -> return
+CLASS -> class
+FUNC -> func
+CONTINUE -> continue
+FINALLY -> finally
+BREAK -> break
+TRUE -> true
+FALSE -> false
+
+
+//key//
+
+COMMA -> comma
+DOT -> dot
+QUOTATION -> quotation
+DOUBLE_QUOTATION -> double_quotation
+SEMICOLON -> semicolon
+DOUBLE_DOT -> double_dot
+CURBRACK -> curbrack
+PARENTHESES -> parentheses
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
