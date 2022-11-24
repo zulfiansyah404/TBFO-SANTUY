@@ -34,20 +34,21 @@ def convertCFG(grammars):
             addRule(rule)
         
         while len(rule)>3:
-            while f"{rule}{idx}" in rules:
+            while f"{rule}{idx}" in CNF:
                 idx += 1
             newRules.insert(0, [f"{rule[0]}{idx}", rule[1], rule[2]])
             rule = [rule[0]] + [f"{rule[0]}{idx}"] + rule[3:]
             idx += 1
         
-        if rule:
+        if (rule) and (rule not in CNF):
             addRule(rule)
             CNF.append(rule)
         
-        if newRules:
+        if (newRules):
             for newRule in newRules:
                 addRule(newRule)
-                CNF.append(newRule)
+                if (newRule not in CNF):
+                    CNF.append(newRule)
         
     while unitProductions:
         rule = unitProductions.pop()
