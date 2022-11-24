@@ -7,22 +7,25 @@ def lex(text, tokenExprs):
     currPos = 1         # position in relative to line
     line = 1            # current line
     tokens = []
-
+    i = 0
     while (pos < len(text)):
+        print("\n" ,pos, line, currPos, "\n")
         if text[pos] == '\n':
             line += 1
             currPos = 1
 
         flag = None
         for tokenExpr in tokenExprs:
+            # print(tokenExpr)
             pattern, tag = tokenExpr    
             
-            regex = re.compile(pattern)
-            flag = regex.match(text, pos)
+            regex = re.compile(pattern) # create regex
+            flag = regex.match(text, pos)   #
 
             if flag:
                 # texts = flag.group(0)
                 if tag:
+                    print(tag)
                     token = tag
                     tokens.append(token)
                 break
@@ -33,6 +36,7 @@ def lex(text, tokenExprs):
         else:
             pos = flag.end(0)
         currPos += 1
+        print(tokens)
 
     return tokens
 
@@ -44,36 +48,40 @@ tokenExprs = [
     (r'[\n]+[ \t]*\"\"\"[(?!(\"\"\"))\w\W]*\"\"\"',  None),
     (r'\'\'\'[(?!(\'\'\'))\w\W]*\'\'\'',             "MULTILINE"),
     (r'\"\"\"[(?!(\"\"\"))\w\W]*\"\"\"',             "MULTILINE"),
-    (r'\n',                                          "NEWLINE"),
+    (r'\n',                                          None),
 
-    # Operator
+    # Logika
     (r'\=(?!\=)',       "EQUAL"),
-    (r'\==',            "ISEQ"),
-    (r'!=',             "NEQ"),
+    (r'\==',            "IS_EQUAL"),
+    (r'\===',           "IS_EQUALS"),
+    (r'\!=',            "IS_NOT_EQUAL"),
+    (r'\!==',           "IS_NOT_EQUALS"),
+    (r'\&&',            "AND"),
+    (r'\|\|',           "OR"),
+    (r'\!',             "NOT"),
     (r'<=',             "LE"),
     (r'<',              "L"),
     (r'>=',             "GE"),
     (r'>',              "G"),
-    (r'\(',             "LB"),
-    (r'\)',             "RB"),
-    (r'\[',             "LSB"),
-    (r'\]',             "RSB"),
-    (r'\{',             "LCB"),
-    (r'\}',             "RCB"),
-    (r'\:',             "COLON"),
-    (r'-=',             "SUBTREQ"),
-    (r'\*=',            "MULEQ"),
-    (r'\+=',            "SUMEQ"),
+
+    # Operator
+    (r'-=',             "SUBEQ"),
+    (r'\*=',            "MULTEQ"),
+    (r'\+=',            "PLUSEQ"),
     (r'/=',             "DIVEQ"),
     (r'\->',            "ARROW"),
     (r'\+',             "ADD"),
     (r'\-',             "SUBTR"),
-    (r'\*',             "MUL"),
+    (r'\*',             "MULT"),
     (r'/',              "DIV"),
     (r'\,',             "COMMA"),
     (r'\w+[.]\w+',      "DOTBETWEEN"),
     (r'\.',             "DOT"),
     (r'\%',             "MOD"),
+    (r'\%=',            "MODEQ"),
+    (r'\*\*',           "POWER"),
+    (r'\+\+',           "INCRE"),
+    (r'\--',            "DECRE"),
 
     # Type
     (r'[\+\-]?[0-9]*\.[0-9]+',  "INT"),
@@ -81,45 +89,61 @@ tokenExprs = [
     (r'[\+\-]?[0-9]',           "INT"),
     (r'\"[^\"\n]*\"',           "STRING"),
     (r'\'[^\'\n]*\'',           "STRING"),
-    (r'\bdict\b',               "TYPE"),
-    (r'\bint\b',                "TYPE"),
-    (r'\bstr\b',                "TYPE"),
-    (r'\bfloat\b',              "TYPE"),
-    (r'\bcomplex\b',            "TYPE"),
-    (r'\blist\b',               "TYPE"),
-    (r'\btuple\b',              "TYPE"),
+
+    # Variabel
+    (r'\bconst\b',              "CONST"),
+    (r'\bvar\b',                "VAR"),
+    (r'\blet\b',                "LET"),
+    (r'\bnull\b',               "NULL"),
 
     # keyword
-    (r'\band\b',                "AND"),
-    (r'\bor\b',                 "OR"),
-    (r'\bnot\b',                "NOT"),
-    (r'\bTrue\b',               "TRUE"),
-    (r'\bFalse\b',              "FALSE"),
+    (r'\btrue\b',               "TRUE"),
+    (r'\bfalse\b',              "FALSE"),
     (r'\bNone\b',               "NONE"),
     (r'\bif\b',                 "IF"),
     (r'\belse\b',               "ELSE"),
-    (r'\belif\b',               "ELIF"),
+    
     (r'\bfor\b',                "FOR"),
-    (r'\bin\b',                 "IN"),
-    (r'\brange\b',              "RANGE"),
     (r'\bwhile\b',              "WHILE"),
     (r'\bbreak\b',              "BREAK"),
     (r'\bcontinue\b',           "CONTINUE"),
-    (r'\bpass\b',               "PASS"),
     (r'\bfrom\b',               "FROM"),
     (r'\bimport\b',             "IMPORT"),
     (r'\bas\b',                 "AS"),
     (r'\bis\b',                 "IS"),
-    (r'\bdef\b',                "DEF"),
+    (r'\bfunction\b',           "FUNC"),
     (r'\breturn\b',             "RETURN"),
     (r'\braise\b',              "RAISE"),
     (r'\bwith\b',               "WITH"),
     (r'\bclass\b',              "CLASS"),
     (r'\btry\b',                "TRY"),
     (r'\bexcept\b',             "EXCEPT"),
+    (r'\bfinally\b',            "FINALLY"),
+    (r'\bdefaut\b',             "DEFAULT"),
+
+    (r'\bconst\b',              "CONST"),
+    (r'\bdelete\b',             "DELETE"),
+    (r'\bswitch\b',             "SWITCH"),
+    (r'\bcase\b',               "CASE"),
+    (r'\bthrow\b',              "THROW"),
+    (r'\bcatch\b',              "CATCH"),
+    (r'\bcontinue\b',           "CONTINUE"),
+
+    # Key
+
+    (r'\b\,\b',                 "COMMA"),
+    (r'\b\.\b',                 "DOT"),
+    (r'\b\:\b',                 "DOUBLE_DOT"),
+    (r'\;',                     "SEMICOLON"),
+    (r"\b\'\b",                 "QOUTATION"),
+    (r'\b\"\b',                 "DOUBLE_QOUTATION"),
+    (r'\(',                     "LPARENTHESIS"),
+    (r'\)',                     "RPARENTHESIS"),
+    (r'\{',                     "LCURBRACK"),
+    (r'\}',                     "RCURBRACK"),
 
     # Exception for variable
-    (r'[A-Za-z_][A-Za-z0-9_]*', "VAR"),
+    (r'[A-Za-z_][A-Za-z0-9_]*', "VARIABLE"),
   ]
 
 
@@ -128,7 +152,7 @@ def create_token(filename):
     file = open(filename, encoding="utf8")
     characters = file.read()
     file.close()
-
+    print(characters)
     tokens = lex(characters, tokenExprs)
     tokenResult = []
 
@@ -137,13 +161,6 @@ def create_token(filename):
 
 
     # Write file
-    path = os.getcwd()
-    fileWrite = open(path + "/result/tokenResult.txt", 'w')
-    for token in tokenResult:
-        fileWrite.write(str(token)+" ")
-        # print(token)
-    fileWrite.close()
-
     return tokenResult
 
 # if __name__ == "__main__": 

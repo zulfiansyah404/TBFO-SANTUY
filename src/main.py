@@ -8,3 +8,4 @@ if __name__ == "__main__":
     
     token = create_token(args.file.name)
     
+    print(token)
