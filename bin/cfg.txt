@@ -1,1 +1,23 @@
-test
+//aritmatika//
+
+SUBTRACT -> subtract
+ADD -> add
+MULT -> mult
+DIV -> div
+MOD -> mod
+POWER -> power
+INCRE -> incre
+DECRE -> decre
+
+//logika//
+
+IS_EQUAL -> is_equal
+IS_EQUALS -> is_equals
+IS_NOT_EQUAL -> is_not_equal
+IS_NOT_EQUALS -> is_not_equals
+AND -> and
+G -> g
+L -> l
+GE -> ge
+LE -> le
+
