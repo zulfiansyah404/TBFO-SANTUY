@@ -1,88 +1,101 @@
-import os
+import keyword
+
+terminal = keyword.kwlist
 
 rules = {}
 
+#Read txt
 def readFile(file):
-    with open(file) as File:
-        grammar = File.readlines()
-        grammarAsList = []
-        for line in grammar:
-            if line.startswith(('/', '#')):
-                continue
-            convertedLine = line.replace("->", '').split()
-            grammarAsList.append(convertedLine)
-    return grammarAsList
+  with open(file) as CFG:
+    CNF = CFG.readlines()
+    cfgAsList = []
+    for i in range(len(CNF)):
+      splitBaris = CNF[i].replace("->", "").split()
+      cfgAsList.append(splitBaris)
+  return cfgAsList
 
+#Print read files
+def printCNF(CNF):
+  for rule in CNF:
+    for i in range(len(rule)):
+      if i == 0:
+        print(rule[i], " -> ", end='')
+      else:
+        print(rule[i], end=' ')
+    print("\n")
+
+#Adding rule to global var
 def addRule(rule):
-    global rules
+  global rules
+  
+  if rule[0] not in rules:
+    rules[rule[0]] = []
+  rules[rule[0]].append(rule[1:])
 
-    if rule[0] not in rules:
-        rules[rule[0]] = []
-    rules[rule[0]].append(rule[1:])
-
-def convertCFG(grammars):
+def convertCFG(CFG):
     global rules
 
     CNF = []
     unitProductions = []
     idx = 0
-
-    for rule in grammars:
-        newRules = []
-        if len(rule)==2 and not rule[1][0].islower():
-            unitProductions.append(rule)
-            addRule(rule)
-            continue
-        
-        while len(rule)>3:
-            # while f"{rule}{idx}" in CNF:
-            #     idx += 1
-            newRules.insert(0, [f"{rule[0]}{idx}", rule[1], rule[2]])
-            rule = [rule[0]] + [f"{rule[0]}{idx}"] + rule[3:]
-            idx += 1
-        
-        if (rule):
-            addRule(rule)
-            CNF.append(rule)
-        
-        if (newRules):
-            for i in range(len(newRules)):
-                CNF.append(newRules[i])
-        
-    while unitProductions:
-        rule = unitProductions.pop()
-        if rule[1] in rules:
-            for values in rules[rule[1]]:
-                newRule = [rule[0]] + values
-                if len(newRule) > 2 or newRule[1][0].islower():
-                    CNF.append(newRule)
-                else:
-                    unitProductions.append(newRule)
-                addRule(newRule)
     
+    for rule in CFG:
+      newRules = []
+      # buat yang cuma satu nonterminal/terminal di kanan
+      if len(rule) == 2 and not rule[1][0].islower() :
+        unitProductions.append(rule)
+        addRule(rule)
+        continue
+      # Proses if lebih dari 3 nonterminalnya ini bakal di split jadi cuma 3 doang  
+      while len(rule) > 3:
+        newRules.append([f"{rule[0]}{idx}", rule[1], rule[2]])
+        rule = [rule[0]] + [f"{rule[0]}{idx}"] + rule[3:]
+        idx += 1
+
+      if rule:
+        addRule(rule)
+        CNF.append(rule)
+      if newRules:
+        for i in range(len(newRules)):
+          CNF.append(newRules[i])
+
+    # Proses cuma yang ada 1 non terminal di kanan
+    while unitProductions:
+      rule = unitProductions.pop() 
+      if rule[1] in rules:
+        for item in rules[rule[1]]:
+          newRules = [rule[0]] + item
+          # nonterminal dikanan bakal dirubah either kalo panjangnya 3 / ada terminal
+          if len(newRules) > 2 or newRules[1][0].islower():
+            CNF.append(newRules)
+          #Kalo cuma 2 tp dia bukan terminal masukin lg ke production ujungnya bakal dirubah jadi terminal
+          else:
+            unitProductions.append(newRules)
+          addRule(newRules)
     return CNF
 
+def mapCNF(CNF):
+  mp = {}
+  for rule in CNF :
+    mp[str(rule[0])] = []
+  for rule in CNF :
+    elm = []
+    for idxRule in range(1, len(rule)) :
+      apd = rule[idxRule]
+      elm.append(apd)
+    mp[str(rule[0])].append(elm)
+  return mp
 
 def writeCNF(CNF):
-    file = open(os.getcwd()+'\\bin\\cnf.txt', 'w')
+    file = open('bin/cnf.txt', 'w')
     for rule in CNF:
         file.write(rule[0])
         file.write(" -> ")
-        for var in rule[1:]:
-            file.write(var)
+        for i in rule[1:]:
+            file.write(i)
             file.write(" ")
         file.write("\n")
     file.close()
 
-def mapCNF(CNF):
-    length = len(CNF)
-    dict = {}
-    for rule in CNF:
-        dict[rule[0]] = []
-        val = []
-        for idx in range(1, len(rule)):
-            val.append(rule[idx])
-        dict[rule[0]].append(val)
-    return dict
-
-writeCNF(convertCFG(readFile("bin/cfg.txt")))
+# if __name__ == "__main__":
+#   writeGrammar(convertGrammar((readGrammarFile("cfg.txt")))) 
