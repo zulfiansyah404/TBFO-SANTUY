@@ -1,10 +1,5 @@
-import keyword
-
-terminal = keyword.kwlist
-
 rules = {}
 
-#Read txt
 def readFile(file):
   with open(file) as CFG:
     CNF = CFG.readlines()
@@ -14,17 +9,6 @@ def readFile(file):
       cfgAsList.append(splitBaris)
   return cfgAsList
 
-#Print read files
-def printCNF(CNF):
-  for rule in CNF:
-    for i in range(len(rule)):
-      if i == 0:
-        print(rule[i], " -> ", end='')
-      else:
-        print(rule[i], end=' ')
-    print("\n")
-
-#Adding rule to global var
 def addRule(rule):
   global rules
   
@@ -41,12 +25,10 @@ def convertCFG(CFG):
     
     for rule in CFG:
       newRules = []
-      # buat yang cuma satu nonterminal/terminal di kanan
       if len(rule) == 2 and not rule[1][0].islower() :
         unitProductions.append(rule)
         addRule(rule)
         continue
-      # Proses if lebih dari 3 nonterminalnya ini bakal di split jadi cuma 3 doang  
       while len(rule) > 3:
         newRules.append([f"{rule[0]}{idx}", rule[1], rule[2]])
         rule = [rule[0]] + [f"{rule[0]}{idx}"] + rule[3:]
@@ -59,16 +41,13 @@ def convertCFG(CFG):
         for i in range(len(newRules)):
           CNF.append(newRules[i])
 
-    # Proses cuma yang ada 1 non terminal di kanan
     while unitProductions:
       rule = unitProductions.pop() 
       if rule[1] in rules:
         for item in rules[rule[1]]:
           newRules = [rule[0]] + item
-          # nonterminal dikanan bakal dirubah either kalo panjangnya 3 / ada terminal
           if len(newRules) > 2 or newRules[1][0].islower():
             CNF.append(newRules)
-          #Kalo cuma 2 tp dia bukan terminal masukin lg ke production ujungnya bakal dirubah jadi terminal
           else:
             unitProductions.append(newRules)
           addRule(newRules)
