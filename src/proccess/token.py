@@ -41,6 +41,10 @@ def lex(text, tokenExprs):
     return tokens
 
 tokenExprs = [
+    # Comment
+    (r'\/\/[^\n]*',             None),
+    (r'\/\*[\w\W]*\*\/',        None),
+
     # Not token
     (r'[ \t]+',                                      None),
     (r'#[^\n]*',                                     None),
@@ -85,14 +89,14 @@ tokenExprs = [
     (r'\--',            "DECRE"),
 
     # Type
-    (r'[0-9]*\.[0-9]+',  "VALUE"),
-    (r'[1-9][0-9]+',     "VALUE"),
-    (r'[0-9]',           "VALUE"),
-    (r'\-[0-9]*\.[0-9]+',  "VALUE"),
-    (r'\-[1-9][0-9]+',     "VALUE"),
-    (r'\-[0-9]',           "VALUE"),
-    (r'\"[^\"\n]*\"',           "VALUE"),
-    (r'\'[^\'\n]*\'',           "VALUE"),
+    (r'[0-9]*\.[0-9]+',     "VALUE"),
+    (r'[1-9][0-9]+',        "VALUE"),
+    (r'[0-9]',              "VALUE"),
+    (r'\-[0-9]*\.[0-9]+',   "VALUE"),
+    (r'\-[1-9][0-9]+',      "VALUE"),
+    (r'\-[0-9]',            "VALUE"),
+    (r'\"[^\"\n]*\"',       "VALUE"),
+    (r'\'[^\'\n]*\'',       "VALUE"),
 
     # Variabel
     (r'\bconst\b',              "CONST"),
@@ -137,7 +141,7 @@ tokenExprs = [
 
     (r'\b\,\b',                 "COMMA"),
     (r'\b\.\b',                 "DOT"),
-    (r'\:',                 "DOUBLE_DOT"),
+    (r'\:',                     "DOUBLE_DOT"),
     (r'\;',                     "SEMICOLON"),
     (r"\b\'\b",                 "QOUTATION"),
     (r'\b\"\b',                 "DOUBLE_QOUTATION"),
@@ -148,6 +152,8 @@ tokenExprs = [
 
     # Exception for variable
     (r'[A-Za-z_][A-Za-z0-9_]*', "VARIABLE"),
+
+
   ]
 
 
