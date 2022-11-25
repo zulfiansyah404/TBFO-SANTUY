@@ -25,30 +25,29 @@ def convertCFG(grammars):
 
     CNF = []
     unitProductions = []
+    idx = 0
 
     for rule in grammars:
         newRules = []
-        idx = 0
         if len(rule)==2 and not rule[1][0].islower():
             unitProductions.append(rule)
             addRule(rule)
+            continue
         
         while len(rule)>3:
-            while f"{rule}{idx}" in CNF:
-                idx += 1
+            # while f"{rule}{idx}" in CNF:
+            #     idx += 1
             newRules.insert(0, [f"{rule[0]}{idx}", rule[1], rule[2]])
             rule = [rule[0]] + [f"{rule[0]}{idx}"] + rule[3:]
             idx += 1
         
-        if (rule) and (rule not in CNF):
+        if (rule):
             addRule(rule)
             CNF.append(rule)
         
         if (newRules):
-            for newRule in newRules:
-                addRule(newRule)
-                if (newRule not in CNF):
-                    CNF.append(newRule)
+            for i in range(len(newRules)):
+                CNF.append(newRules[i])
         
     while unitProductions:
         rule = unitProductions.pop()
@@ -85,3 +84,5 @@ def mapCNF(CNF):
             val.append(rule[idx])
         dict[rule[0]].append(val)
     return dict
+
+writeCNF(convertCFG(readFile("bin/cfg.txt")))
