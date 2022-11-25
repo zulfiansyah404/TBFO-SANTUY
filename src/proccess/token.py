@@ -123,7 +123,7 @@ tokenExprs = [
     (r'\btry\b',                "TRY"),
     (r'\bexcept\b',             "EXCEPT"),
     (r'\bfinally\b',            "FINALLY"),
-    (r'\bdefaut\b',             "DEFAULT"),
+    (r'\bdefault\b',             "DEFAULT"),
 
     (r'\bconst\b',              "CONST"),
     (r'\bdelete\b',             "DELETE"),
