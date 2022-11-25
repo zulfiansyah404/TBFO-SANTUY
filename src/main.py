@@ -19,16 +19,18 @@ if __name__ == "__main__":
 
     # Buat tampilan compiling
     start_time = time()
-    print("=============================================")
+    print("\n=============================================")
     print("Compiling " + args.file.name + "...")
     print("")
 
     token = createToken(args.file.name)
-    token = [var.lower() for var in token]
-    CNF = mapCNF(convertCFG(readFile('bin/cfg.txt'))   )
-    #writeGrammar(convertGrammar(readGrammarFile('bin/cfg.txt')))
-    # print(CNF)
-    parserr(token, CNF)
+
+    if (token != -1):
+        token = [var.lower() for var in token]
+        CNF = mapCNF(convertCFG(readFile('bin/cfg.txt'))   )
+        #writeGrammar(convertGrammar(readGrammarFile('bin/cfg.txt')))
+        # print(CNF)
+        parserr(token, CNF)
     print("\nExecution Time : " + str(time() - start_time) + " seconds")
     print("=============================================")
     # print(token)

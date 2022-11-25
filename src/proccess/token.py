@@ -31,8 +31,8 @@ def strToTokens(text, tokenExprs):
                 break
 
         if not flag:
-            print(f"\nSyntax Error\nIllegal character {text[pos]} at line {line} and column {currPos}")
-            sys.exit(1)
+            print("Syntax Error")
+            return -1
         else:
             pos = flag.end(0)
         currPos += 1
@@ -164,6 +164,10 @@ def createToken(filename):
     file.close()
     # print(characters)
     tokens = strToTokens(characters, tokenExprs)
+
+    if (tokens == -1):
+        return -1
+
     tokenResult = []
 
     for token in tokens:

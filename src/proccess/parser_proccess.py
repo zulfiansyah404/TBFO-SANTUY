@@ -20,4 +20,5 @@ def parserr(token, CNF):
     elif ('S') in cyk[0][tokenLength-1]:
         print("Accepted")
     else:
+        # print(cyk[0][tokenLength-1])   
         print("Syntax Error")
