@@ -80,6 +80,7 @@ tokenExprs = [
     (r'\%',             "MOD"),
     (r'\%=',            "MODEQ"),
     (r'\*\*',           "POWER"),
+    (r'\*\*=',          "POWEQ"),
     (r'\+\+',           "INCRE"),
     (r'\--',            "DECRE"),
 
