@@ -137,7 +137,7 @@ tokenExprs = [
 
     (r'\b\,\b',                 "COMMA"),
     (r'\b\.\b',                 "DOT"),
-    (r'\b\:\b',                 "DOUBLE_DOT"),
+    (r'\:',                 "DOUBLE_DOT"),
     (r'\;',                     "SEMICOLON"),
     (r"\b\'\b",                 "QOUTATION"),
     (r'\b\"\b',                 "DOUBLE_QOUTATION"),

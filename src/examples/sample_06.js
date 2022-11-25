@@ -1,7 +1,14 @@
 var  j=0;
-for (var i = 0; i < 5; i++) {
-    if(i>3){
-        if(i<2){}
-        continue;
-    }
+switch(j){
+    case 1 :
+        break;
+    case 2:
+        break;
+    case 3:
+        if(j==0){}
+    case 4:
+        break;
+    default:
+        break;
+        
 }
