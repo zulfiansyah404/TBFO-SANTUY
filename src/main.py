@@ -18,8 +18,8 @@ if __name__ == "__main__":
     token = create_token(args.file.name)
     token = [var.lower() for var in token]
     print(token)
-    CNF = mapGrammar(convertGrammar(readGrammarFile('bin/cfg.txt'))   )
-    writeGrammar(convertGrammar(readGrammarFile('bin/cfg.txt')))
+    CNF = mapCNF(convertCFG(readFile('bin/cfg.txt'))   )
+    #writeGrammar(convertGrammar(readGrammarFile('bin/cfg.txt')))
     # print(CNF)
     parserr(token, CNF)
 
