@@ -2,7 +2,7 @@ import os
 import sys 
 import re
 
-def lex(text, tokenExprs):
+def strToTokens(text, tokenExprs):
     pos = 0             # absolute position
     currPos = 1         # position in relative to line
     line = 1            # current line
@@ -31,7 +31,7 @@ def lex(text, tokenExprs):
                 break
 
         if not flag:
-            print(f"\nSYNTAX ERROR\nIllegal character {text[pos]} at line {line} and column {currPos}")
+            print(f"\nSyntax Error\nIllegal character {text[pos]} at line {line} and column {currPos}")
             sys.exit(1)
         else:
             pos = flag.end(0)
@@ -157,13 +157,13 @@ tokenExprs = [
   ]
 
 
-def create_token(filename):
+def createToken(filename):
     # Read file
     file = open(filename, encoding="utf8")
     characters = file.read()
     file.close()
     # print(characters)
-    tokens = lex(characters, tokenExprs)
+    tokens = strToTokens(characters, tokenExprs)
     tokenResult = []
 
     for token in tokens:
