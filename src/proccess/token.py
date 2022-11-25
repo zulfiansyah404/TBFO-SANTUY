@@ -9,7 +9,7 @@ def lex(text, tokenExprs):
     tokens = []
     i = 0
     while (pos < len(text)):
-        print("\n" ,pos, line, currPos, "\n")
+        # print("\n" ,pos, line, currPos, "\n")
         if text[pos] == '\n':
             line += 1
             currPos = 1
@@ -25,7 +25,7 @@ def lex(text, tokenExprs):
             if flag:
                 # texts = flag.group(0)
                 if tag:
-                    print(tag)
+                    # print(tag)
                     token = tag
                     tokens.append(token)
                 break
@@ -36,7 +36,7 @@ def lex(text, tokenExprs):
         else:
             pos = flag.end(0)
         currPos += 1
-        print(tokens)
+        # print(tokens)
 
     return tokens
 
@@ -84,11 +84,11 @@ tokenExprs = [
     (r'\--',            "DECRE"),
 
     # Type
-    (r'[\+\-]?[0-9]*\.[0-9]+',  "INT"),
-    (r'[\+\-]?[1-9][0-9]+',     "INT"),
-    (r'[\+\-]?[0-9]',           "INT"),
-    (r'\"[^\"\n]*\"',           "STRING"),
-    (r'\'[^\'\n]*\'',           "STRING"),
+    (r'[\+\-]?[0-9]*\.[0-9]+',  "VALUE"),
+    (r'[\+\-]?[1-9][0-9]+',     "VALUE"),
+    (r'[\+\-]?[0-9]',           "VALUE"),
+    (r'\"[^\"\n]*\"',           "VALUE"),
+    (r'\'[^\'\n]*\'',           "VALUE"),
 
     # Variabel
     (r'\bconst\b',              "CONST"),
@@ -152,7 +152,7 @@ def create_token(filename):
     file = open(filename, encoding="utf8")
     characters = file.read()
     file.close()
-    print(characters)
+    # print(characters)
     tokens = lex(characters, tokenExprs)
     tokenResult = []
 

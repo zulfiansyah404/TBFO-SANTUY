@@ -1,13 +1,13 @@
 import sys, argparse
 from proccess.token import create_token
-from proccess.CFGtoCNF import mapCNF, convertCFG, readFile, writeCNF
-
+from proccess.CFGtoCNF import *
+from proccess.parser_proccess import parserr
 
 
 if __name__ == "__main__":
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('file', type = argparse.FileType('r'))
-    # args = parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file', type = argparse.FileType('r'))
+    args = parser.parse_args()
     
     
     
@@ -15,11 +15,12 @@ if __name__ == "__main__":
     splash = open("src/banner/splash.txt", "r")
     print(splash.read())
     
-    # token = create_token(args.file.name)
-    # token = [var.lower() for var in token]
-    CNF = mapCNF(convertCFG(readFile('bin/cfg.txt')))
-    writeCNF(convertCFG(readFile('bin/cfg.txt')))
-    print(CNF)
-    # parser(token, CNF)
+    token = create_token(args.file.name)
+    token = [var.lower() for var in token]
+    print(token)
+    CNF = mapGrammar(convertGrammar(readGrammarFile('bin/cfg.txt'))   )
+    writeGrammar(convertGrammar(readGrammarFile('bin/cfg.txt')))
+    # print(CNF)
+    parserr(token, CNF)
 
     # print(token)
