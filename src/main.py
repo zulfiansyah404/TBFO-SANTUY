@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     if (token != -1):
         token = [var.lower() for var in token]
-        CNF = mapCNF(convertCFG(readFile('bin/cfg.txt'))   )
+        CNF = mapCNF(readFile('bin/cnf.txt'))
         #writeGrammar(convertGrammar(readGrammarFile('bin/cfg.txt')))
         # print(CNF)
         parserr(token, CNF)

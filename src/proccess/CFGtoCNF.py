@@ -77,4 +77,4 @@ def writeCNF(CNF):
     file.close()
 
 # if __name__ == "__main__":
-#   writeGrammar(convertGrammar((readGrammarFile("cfg.txt")))) 
+writeCNF(convertCFG((readFile("bin/cfg.txt")))) 
