@@ -14,8 +14,7 @@ def parserr(token, CNF):
                         if (len(rule) == 2) and (rule[0] in cyk[j][k]) and (rule[1] in cyk[k+1][i]):
                             cyk[j][i].add(key)
 
-    print(cyk)   
-    print(cyk[0][tokenLength-1])
+    print(cyk[0])   
     if ('S') in cyk[0][tokenLength-1]:
         print("Accepted")
     else:
