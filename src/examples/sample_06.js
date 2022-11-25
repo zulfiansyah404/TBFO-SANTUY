@@ -1,14 +1,11 @@
-var  j=0;
-switch(j){
-    case 1 :
-        break;
-    case 2:
-        break;
-    case 3:
-        if(j==0){}
-    case 4:
-        break;
-    default:
-        break;
-        
+var i =0;
+try{
+    if(i==0) throw "kontol";
+    if(i==1) throw "kontol";
+}catch(e){
+    if(i==0){
+
+    }
+}finally{
+
 }
