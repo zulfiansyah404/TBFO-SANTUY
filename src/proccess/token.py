@@ -128,6 +128,7 @@ tokenExprs = [
     (r'\bexcept\b',             "EXCEPT"),
     (r'\bfinally\b',            "FINALLY"),
     (r'\bdefault\b',             "DEFAULT"),
+    (r'\bconsole.log\b',             "CONSLOG"),
 
     (r'\bconst\b',              "CONST"),
     (r'\bdelete\b',             "DELETE"),
