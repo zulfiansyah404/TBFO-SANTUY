@@ -79,7 +79,6 @@ tokenExprs = [
     (r'\*',             "MULT"),
     (r'/',              "DIV"),
     (r'\,',             "COMMA"),
-    (r'\w+[.]\w+',      "DOTBETWEEN"),
     (r'\.',             "DOT"),
     (r'\%',             "MOD"),
     (r'\%=',            "MODEQ"),

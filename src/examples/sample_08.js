@@ -4,3 +4,4 @@
 
 
 */
+console.log(fpb(1));
