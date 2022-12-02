@@ -1,1 +1,8 @@
-var i = 10;
+
+while (true) {
+    ret = 0;
+    break;
+}
+
+
+  
