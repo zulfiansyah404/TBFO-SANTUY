@@ -130,6 +130,7 @@ tokenExprs = [
     (r'\bdefault\b',             "DEFAULT"),
     (r'\bconsole.log\b',             "CONSLOG"),
 
+
     (r'\bconst\b',              "CONST"),
     (r'\bdelete\b',             "DELETE"),
     (r'\bswitch\b',             "SWITCH"),
